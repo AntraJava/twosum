@@ -1,0 +1,33 @@
+resilience4j.circuitbreaker:
+  instances:
+    backend:
+      registerHealthIndicator: true
+      slidingWindowSize: 10
+      permittedNumberOfCallsInHalfOpenState: 3
+      slidingWindowType: TIME_BASED
+      minimumNumberOfCalls: 20
+      waitDurationInOpenState: 50s
+      failureRateThreshold: 50
+      eventConsumerBufferSize: 10
+
+resilience4j.retry:
+  instances:
+    backend:
+      maxAttempts: 3
+      waitDuration: 2s
+      retryExceptions:
+        - java.lang.Throwable
+
+
+resilience4j.ratelimiter:
+  instances:
+    backend:
+      limitForPeriod: 5
+      limitRefreshPeriod: 5s
+      timeoutDuration: 3s
+
+resilience4j.timelimiter:
+  instances:
+    backend:
+      timeoutDuration: 2s
+      cancelRunningFuture: true

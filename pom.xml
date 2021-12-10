@@ -10,7 +10,10 @@
     <packaging>pom</packaging>
 
     <modules>
-        <module></module>
+        <module>calculate_fast_service</module>
+        <module>config_server</module>
+        <module>twosum_main</module>
+        <module>service_discovery</module>
     </modules>
 
 </project>
