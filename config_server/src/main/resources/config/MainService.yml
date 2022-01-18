@@ -18,12 +18,11 @@ resilience4j.retry:
       retryExceptions:
         - java.lang.Throwable
 
-
 resilience4j.ratelimiter:
   instances:
     backend:
-      limitForPeriod: 5
-      limitRefreshPeriod: 5s
+      limitForPeriod: 10
+      limitRefreshPeriod: 1000
       timeoutDuration: 3s
 
 resilience4j.timelimiter:

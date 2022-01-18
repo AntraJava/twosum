@@ -4,6 +4,7 @@ import com.antra.twosum.twosum_main.pojo.TwoSumResponse;
 import com.antra.twosum.twosum_main.pojo.UserInput;
 import com.antra.twosum.twosum_main.pojo.UserResponse;
 import com.antra.twosum.twosum_main.service.OperationService;
+import io.github.resilience4j.ratelimiter.annotation.RateLimiter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,7 +36,8 @@ public class TwoSumMainController {
 //	}
 
 	@PostMapping(value = "/twosum", consumes = "application/json")
-	public ResponseEntity<UserResponse> getTwosum(@RequestBody UserInput input) {
+	@RateLimiter(name = "backend", fallbackMethod = "rateLimiterFallBack")
+	public ResponseEntity<UserResponse> getTwosum(@RequestBody UserInput input) throws Exception {
 		//validation
 		LOGGER.info("calling main service twosum endpoint");
 		LOGGER.info("Received: " + input);
@@ -49,5 +51,9 @@ public class TwoSumMainController {
 		LOGGER.error("Error in Main Controller",ex);
 		return new ResponseEntity<>("Bad things happened", HttpStatus.BAD_REQUEST);
 
+	}
+	public ResponseEntity<String> rateLimiterFallBack(UserInput input, Throwable e) {
+		LOGGER.error("in rate limiter");
+		return ResponseEntity.badRequest().body("You too fast");
 	}
 }

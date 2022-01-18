@@ -33,6 +33,14 @@ public class CalculateFastController {
 			}
 		}
 		LOGGER.info("Reponsed:" + result);
+		try {
+			Thread.sleep(new Random().nextInt(10) * 1000);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		if (new Random().nextInt(100) > 50) {
+			throw new RuntimeException("Oh no~");
+		}
 		return new TwoSumResponse(result);
 	}
 

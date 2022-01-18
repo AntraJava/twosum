@@ -32,8 +32,7 @@ public class OperationServiceImpl implements OperationService {
 	private static final String BACKEND = "backend";
 	@Override
 //	@Retry(name = BACKEND, fallbackMethod = "retryFallBack")
-	@RateLimiter(name = BACKEND, fallbackMethod = "rateLimiterFallBack")
-//	@CircuitBreaker(name = BACKEND, fallbackMethod = "circuitFallBack")
+	@CircuitBreaker(name = BACKEND, fallbackMethod = "circuitFallBack")
 	public UserResponse service(UserInput input) {
 		TwoSumInput entity = new TwoSumInput();
 		entity.setArray(input.getArray());
@@ -53,8 +52,5 @@ public class OperationServiceImpl implements OperationService {
 		LOGGER.error("in retry ");
 		return null;
 	}
-	private UserResponse rateLimiterFallBack(UserInput input, Throwable e) {
-		LOGGER.error("in rate limiter");
-		return null;
-	}
+
 }
