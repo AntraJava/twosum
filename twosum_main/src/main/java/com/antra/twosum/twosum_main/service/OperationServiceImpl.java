@@ -31,7 +31,7 @@ public class OperationServiceImpl implements OperationService {
 
 	private static final String BACKEND = "backend";
 	@Override
-	@Retry(name = BACKEND, fallbackMethod = "retryFallBack")
+//	@Retry(name = BACKEND, fallbackMethod = "retryFallBack")
 	@RateLimiter(name = BACKEND, fallbackMethod = "rateLimiterFallBack")
 //	@CircuitBreaker(name = BACKEND, fallbackMethod = "circuitFallBack")
 	public UserResponse service(UserInput input) {
@@ -50,11 +50,11 @@ public class OperationServiceImpl implements OperationService {
 		return null;
 	}
 	private UserResponse retryFallBack(UserInput input, Throwable e) {
-		LOGGER.error("in retry breaker");
+		LOGGER.error("in retry ");
 		return null;
 	}
 	private UserResponse rateLimiterFallBack(UserInput input, Throwable e) {
-		LOGGER.error("in rate breaker");
+		LOGGER.error("in rate limiter");
 		return null;
 	}
 }
