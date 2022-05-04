@@ -36,7 +36,7 @@ public class TwoSumMainController {
 //	}
 
 	@PostMapping(value = "/twosum", consumes = "application/json")
-	@RateLimiter(name = "backend", fallbackMethod = "rateLimiterFallBack")
+//	@RateLimiter(name = "backend", fallbackMethod = "rateLimiterFallBack")
 	public ResponseEntity<UserResponse> getTwosum(@RequestBody UserInput input) throws Exception {
 		//validation
 		LOGGER.info("calling main service twosum endpoint");

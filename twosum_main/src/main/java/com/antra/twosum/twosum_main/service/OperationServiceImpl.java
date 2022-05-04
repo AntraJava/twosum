@@ -31,8 +31,8 @@ public class OperationServiceImpl implements OperationService {
 
 	private static final String BACKEND = "backend";
 	@Override
-//	@Retry(name = BACKEND, fallbackMethod = "retryFallBack")
-	@CircuitBreaker(name = BACKEND, fallbackMethod = "circuitFallBack")
+	@Retry(name = BACKEND, fallbackMethod = "retryFallBack")
+//	@CircuitBreaker(name = BACKEND, fallbackMethod = "circuitFallBack")
 	public UserResponse service(UserInput input) {
 		TwoSumInput entity = new TwoSumInput();
 		entity.setArray(input.getArray());
